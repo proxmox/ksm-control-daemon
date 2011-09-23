@@ -1,0 +1,12 @@
+# Defaults for ksmtuned initscript
+# sourced by /etc/init.d/ksmtuned
+# installed at /etc/default/ksmtuned by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+
+# start ksmtuned at boot [yes|no]
+START=yes
+

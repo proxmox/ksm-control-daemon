@@ -1,0 +1,23 @@
+Index: new/ksmtuned
+===================================================================
+--- new.orig/ksmtuned	2011-02-07 06:43:33.000000000 +0100
++++ new/ksmtuned	2011-02-07 07:07:22.000000000 +0100
+@@ -71,7 +71,7 @@
+ committed_memory () {
+     # calculate how much memory is committed to running qemu processes
+     local progname
+-    progname=${1:-qemu-kvm}
++    progname=${1:-kvm}
+     ps -C "$progname" -o rsz | awk '{ sum += $1 }; END { print sum }'
+ }
+ 
+@@ -124,8 +124,7 @@
+     trap nothing SIGUSR1
+     while true
+     do
+-        sleep $KSM_MONITOR_INTERVAL &
+-        wait $!
++        sleep $KSM_MONITOR_INTERVAL
+         adjust
+     done
+ }

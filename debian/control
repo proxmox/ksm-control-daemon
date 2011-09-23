@@ -1,0 +1,14 @@
+Source: ksm-control-daemon
+Section: admin
+Priority: optional
+Maintainer: Proxmox Support Team <support@proxmox.com>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.7.3
+Homepage: http://pve.proxmox.com
+
+Package: ksm-control-daemon
+Architecture: all
+Depends: bash (>= 3.2)
+Description: The KSM tuning daemon
+ This package contains the KSM tuning daemon which controls whether
+ ksm should ksm search duplicated pages.

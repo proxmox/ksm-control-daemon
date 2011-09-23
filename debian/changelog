@@ -1,0 +1,38 @@
+ksm-control-daemon (1.0-6) unstable; urgency=low
+
+  * add runlevel 2 to LSM header (init script)
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 14 Jun 2011 06:02:52 +0200
+
+ksm-control-daemon (1.0-5) unstable; urgency=low
+
+  * update to latest available version
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 07 Feb 2011 07:10:26 +0100
+
+ksm-control-daemon (1.0-4) unstable; urgency=low
+
+  * set KSM_SLEEP_MSEC=100 to reducd cpu load
+  
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 28 May 2010 07:53:00 +0200
+
+ksm-control-daemon (1.0-3) unstable; urgency=low
+
+  * fix committed_memory calculation
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 01 Feb 2010 14:49:42 +0100
+
+ksm-control-daemon (1.0-2) unstable; urgency=low
+
+  * fix bug in init script (s/$prox/$prog/)
+
+  * fix default path (/etc/default/ksmtuned)
+  
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 29 Dec 2009 16:02:36 +0100
+
+ksm-control-daemon (1.0-1) unstable; urgency=low
+
+  * first release
+
+ -- Proxmox Support Team <support@proxmox.com>  Tue, 15 Dec 2009 12:30:41 +0100
+

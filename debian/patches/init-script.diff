@@ -1,0 +1,127 @@
+Index: new/ksmtuned.init
+===================================================================
+--- new.orig/ksmtuned.init	2011-06-14 05:58:03.000000000 +0200
++++ new/ksmtuned.init	2011-06-14 06:01:38.000000000 +0200
+@@ -19,7 +19,8 @@
+ # Required-Start:
+ # Required-Stop:
+ # Should-Start:
+-# Default-Start: 3 4 5
++# Default-Start: 2 3 4 5
++# Default-Stop: 0 1 6
+ # Short-Description: tune the speed of ksm
+ # Description: The Kernel Samepage Merging control Daemon is a simple script
+ #   that controls whether (and with what vigor) should ksm search duplicated
+@@ -27,27 +28,50 @@
+ #   needs testing and ironing. contact danken@redhat.com if something breaks.
+ ### END INIT INFO
+ 
+-. /etc/rc.d/init.d/functions
++. /lib/lsb/init-functions
++
++PATH=/sbin:/bin:/usr/sbin:/usr/bin
+ 
+ prog=ksmtuned
+ ksmtuned=/usr/sbin/ksmtuned
++DESC="KSM control daemon"
++
+ pidfile=${PIDFILE-/var/run/ksmtune.pid}
+ RETVAL=0
+ 
++test -x $ksmtuned || exit 0
++
++# Include defaults if available
++if [ -f /etc/default/$prog ] ; then
++        . /etc/default/$prog
++fi
++
++if [ "$START" != "yes" ]; then
++        exit 0
++fi
++
+ start() {
+-    echo -n $"Starting $prog: "
+-    daemon --pidfile=${pidfile} $ksmtuned
++
++    [ -d /sys/kernel/mm/ksm/ ] || exit 0;
++
++    log_daemon_msg "Starting $DESC" $prog
++    pid=$( pidofproc -p ${pidfile} $ksmtuned )
++    if [ -n "$pid" ] ; then
++	log_begin_msg "Already running."
++	log_end_msg 0
++	exit 0
++    fi
++
++    start-stop-daemon --start --quiet --pidfile=${pidfile} --exec $ksmtuned
+     RETVAL=$?
+-    echo
+-    [ $RETVAL -eq 0 ] && touch /var/lock/subsys/$prog
++    log_end_msg $RETVAL
+ }
+ 
+ stop() {
+-    echo -n $"Stopping $prog: "
+-    killproc -p ${pidfile}
++    log_daemon_msg "Stopping $DESC" $prog
++    start-stop-daemon --stop --quiet --pidfile ${pidfile}
+     RETVAL=$?
+-    echo
+-    [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/$prog
++    log_end_msg $RETVAL
+ }
+ 
+ restart() {
+@@ -55,10 +79,6 @@
+     start
+ }
+ 
+-condrestart() {
+-    [ -e /var/lock/subsys/$prog ] && restart || :
+-}
+-
+ case "$1" in
+   start)
+ 	start
+@@ -67,27 +87,28 @@
+ 	stop
+ 	;;
+   status)
+-        status -p ${pidfile} $prog
+-	RETVAL=$?
++	pidofproc -p ${pidfile} $ksmtuned >/dev/null
++ 	RETVAL=$?
++	if [ $RETVAL -eq 0 ]; then
++	    log_success_msg "$DESC is running."
++	else
++	    log_failure_msg "$DESC is not running."
++	fi
+ 	;;
+   restart|force-reload)
+ 	restart
+ 	;;
+-  condrestart|try-restart)
+-	condrestart
+-	;;
+-  retune)
+-        pid=`cat ${pidfile} 2> /dev/null`
+-        RETVAL=$?
+-        if [ -z "$pid" ]; then
+-	    echo $"Cannot retune, service is not running."
+-	else
++  reload)
++	pid=$( pidofproc -p ${pidfile} $ksmtuned )
++	if [ -n "$pid" ] ; then
+             kill -SIGUSR1 $pid
+             RETVAL=$?
+-	fi
++	else
++	    log_failure_msg "$DESC is not running."
++ 	fi
+         ;;
+   *)
+-	echo $"Usage: $prog {start|stop|restart|force-reload|condrestart|try-restart|status|retune|help}"
++	echo $"Usage: $prog {start|stop|restart|force-reload|status|reload|help}"
+ 	RETVAL=2
+ esac
+ 

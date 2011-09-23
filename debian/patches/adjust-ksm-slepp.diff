@@ -1,0 +1,26 @@
+Index: new/ksmtuned
+===================================================================
+--- new.orig/ksmtuned	2011-06-14 06:00:42.000000000 +0200
++++ new/ksmtuned	2011-06-14 06:01:01.000000000 +0200
+@@ -37,7 +37,7 @@
+ KSM_NPAGES_MAX=${KSM_NPAGES_MAX:-1250}
+ # millisecond sleep between ksm scans for 16Gb server. Smaller servers sleep
+ # more, bigger sleep less.
+-KSM_SLEEP_MSEC=${KSM_SLEEP_MSEC:-10}
++KSM_SLEEP_MSEC=${KSM_SLEEP_MSEC:-100}
+ 
+ KSM_THRES_COEF=${KSM_THRES_COEF:-20}
+ KSM_THRES_CONST=${KSM_THRES_CONST:-2048}
+Index: new/ksmtuned.conf
+===================================================================
+--- new.orig/ksmtuned.conf	2011-06-14 05:58:03.000000000 +0200
++++ new/ksmtuned.conf	2011-06-14 06:01:01.000000000 +0200
+@@ -5,7 +5,7 @@
+ 
+ # Millisecond sleep between ksm scans for 16Gb server.
+ # Smaller servers sleep more, bigger sleep less.
+-# KSM_SLEEP_MSEC=10
++# KSM_SLEEP_MSEC=100
+ 
+ # KSM_NPAGES_BOOST=300
+ # KSM_NPAGES_DECAY=-50
