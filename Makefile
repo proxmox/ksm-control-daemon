@@ -17,10 +17,15 @@ ${KSM_DEB} ksm: ksm-control-scripts.org/ksm.init
 	cd ksm-control-scripts; dpkg-buildpackage -b -rfakeroot -us -uc
 	lintian ${KSM_DEB} || true
 
-ksm-control-scripts.org/ksm.init:
+.PHONY: download
+download:
+	rm -rf ksm-control-scripts.org ksm-control-scripts.org.tar.gz
 	git clone git://gitorious.org/ksm-control-scripts/ksm-control-scripts.git ksm-control-scripts.org
-	touch $@
+	tar czf ksm-control-scripts.org.tar.gz ksm-control-scripts.org
 
+ksm-control-scripts.org/ksm.init: ksm-control-scripts.org.tar.gz
+	tar xzf ksm-control-scripts.org.tar.gz
+	touch $@
 
 .PHONY: upload
 upload: ${KSM_DEB}
