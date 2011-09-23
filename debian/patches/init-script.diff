@@ -1,10 +1,15 @@
 Index: new/ksmtuned.init
 ===================================================================
---- new.orig/ksmtuned.init	2011-06-14 05:58:03.000000000 +0200
-+++ new/ksmtuned.init	2011-06-14 06:01:38.000000000 +0200
-@@ -19,7 +19,8 @@
- # Required-Start:
- # Required-Stop:
+--- new.orig/ksmtuned.init	2011-09-23 12:11:48.000000000 +0200
++++ new/ksmtuned.init	2011-09-23 12:13:29.000000000 +0200
+@@ -16,10 +16,11 @@
+ #
+ ### BEGIN INIT INFO
+ # Provides: ksmtuned
+-# Required-Start:
+-# Required-Stop:
++# Required-Start: $remote_fs
++# Required-Stop: $remote_fs
  # Should-Start:
 -# Default-Start: 3 4 5
 +# Default-Start: 2 3 4 5
