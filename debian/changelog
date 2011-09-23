@@ -1,3 +1,11 @@
+ksm-control-daemon (1.1-1) unstable; urgency=low
+
+  * first version for PVE 2.0
+  
+  * updates from upstream
+
+ -- Proxmox Support Team <support@proxmox.com>  Fri, 23 Sep 2011 11:37:46 +0200
+
 ksm-control-daemon (1.0-6) unstable; urgency=low
 
   * add runlevel 2 to LSM header (init script)
