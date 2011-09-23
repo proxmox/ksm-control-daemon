@@ -14,7 +14,7 @@ ${KSM_DEB} ksm: ksm-control-scripts.org/ksm.init
 	rm -rf ksm-control-scripts
 	rsync -a --exclude .git ksm-control-scripts.org/ ksm-control-scripts
 	cp -a debian ksm-control-scripts
-	cd ksm-control-scripts; dpkg-buildpackage -rfakeroot -us -uc
+	cd ksm-control-scripts; dpkg-buildpackage -b -rfakeroot -us -uc
 	lintian ${KSM_DEB} || true
 
 ksm-control-scripts.org/ksm.init:
