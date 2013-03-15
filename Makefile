@@ -1,4 +1,4 @@
-RELEASE=2.0
+RELEASE=3.0
 
 PACKAGE=ksm-control-daemon
 
