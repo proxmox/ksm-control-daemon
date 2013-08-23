@@ -8,12 +8,15 @@ PKGREL=1
 
 KSM_DEB=${PACKAGE}_${PKGVER}-${PKGREL}_all.deb
 
+GITVERSION:=$(shell cat .git/refs/heads/master)
+
 all: ${KSM_DEB}
 
 ${KSM_DEB} ksm: ksm-control-scripts.org/ksm.init
 	rm -rf ksm-control-scripts
 	rsync -a --exclude .git ksm-control-scripts.org/ ksm-control-scripts
 	cp -a debian ksm-control-scripts
+	echo "git clone git://git.proxmox.com/git/ksm-control-daemon.git\\ngit checkout ${GITVERSION}" > ksm-control-scripts/debian/SOURCE
 	cd ksm-control-scripts; dpkg-buildpackage -b -rfakeroot -us -uc
 	lintian ${KSM_DEB} || true
 
