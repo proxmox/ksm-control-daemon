@@ -2,13 +2,13 @@ Source: ksm-control-daemon
 Section: admin
 Priority: optional
 Maintainer: Proxmox Support Team <support@proxmox.com>
-Build-Depends: debhelper (>= 7)
+Build-Depends: debhelper (>= 7), quilt, dh-systemd (>= 1.4)
 Standards-Version: 3.7.3
 Homepage: http://pve.proxmox.com
 
 Package: ksm-control-daemon
 Architecture: all
-Depends: bash (>= 3.2)
-Description: The KSM tuning daemon
+Depends: bash (>= 3.2), systemd
+Description: Kernel Samepage Merging (KSM) Tuning Daemon
  This package contains the KSM tuning daemon which controls whether
  ksm should ksm search duplicated pages.

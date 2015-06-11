@@ -1,3 +1,11 @@
+ksm-control-daemon (1.2-1) unstable; urgency=medium
+
+  * updates for PVE 4.0
+  
+  * use systemd
+  
+ -- Proxmox Support Team <support@proxmox.com>  Thu, 11 Jun 2015 09:22:04 +0200
+
 ksm-control-daemon (1.1-1) unstable; urgency=low
 
   * first version for PVE 2.0

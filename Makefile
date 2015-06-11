@@ -1,9 +1,9 @@
-RELEASE=3.0
+RELEASE=4.0
 
 PACKAGE=ksm-control-daemon
 
 # also update debian/changelog
-PKGVER=1.1
+PKGVER=1.2
 PKGREL=1
 
 KSM_DEB=${PACKAGE}_${PKGVER}-${PKGREL}_all.deb
