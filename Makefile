@@ -17,7 +17,7 @@ ${KSM_DEB} ksm: ksm-control-scripts.org/ksm.init
 	rsync -a --exclude .git ksm-control-scripts.org/ ksm-control-scripts
 	cp -a debian ksm-control-scripts
 	echo "git clone git://git.proxmox.com/git/ksm-control-daemon.git\\ngit checkout ${GITVERSION}" > ksm-control-scripts/debian/SOURCE
-	cd ksm-control-scripts; dpkg-buildpackage -b -rfakeroot -us -uc
+	cd ksm-control-scripts; dpkg-buildpackage -b -us -uc
 	lintian ${KSM_DEB} || true
 
 .PHONY: download
