@@ -32,13 +32,7 @@ ksm-control-scripts.org/ksm.init: ksm-control-scripts.org.tar.gz
 
 .PHONY: upload
 upload: ${KSM_DEB}
-	umount /pve/${RELEASE}; mount /pve/${RELEASE} -o rw 
-	mkdir -p /pve/${RELEASE}/extra
-	rm -rf /pve/${RELEASE}/extra/Packages*
-	rm -rf /pve/${RELEASE}/extra/${PACKAGE}_*.deb
-	cp ${KSM_DEB} /pve/${RELEASE}/extra
-	cd /pve/${RELEASE}/extra; dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
-	umount /pve/${RELEASE}; mount /pve/${RELEASE} -o ro
+	tar cf - ${KSM_DEB} | ssh repoman@repo.proxmox.com upload
 
 .PHONY: distclean
 distclean: clean
