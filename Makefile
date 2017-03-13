@@ -32,7 +32,7 @@ ksm-control-scripts.org/ksm.init: ksm-control-scripts.org.tar.gz
 
 .PHONY: upload
 upload: ${KSM_DEB}
-	tar cf - ${KSM_DEB} | ssh repoman@repo.proxmox.com upload
+	tar cf - ${KSM_DEB} | ssh repoman@repo.proxmox.com -- upload --product pve --dist stretch
 
 .PHONY: distclean
 distclean: clean
