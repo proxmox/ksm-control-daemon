@@ -6,7 +6,7 @@ PKGREL=2
 
 KSM_DEB=${PACKAGE}_${PKGVER}-${PKGREL}_all.deb
 
-GITVERSION:=$(shell cat .git/refs/heads/master)
+GITVERSION:=$(shell git rev-parse HEAD)
 
 all: ${KSM_DEB}
 
