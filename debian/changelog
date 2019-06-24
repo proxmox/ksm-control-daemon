@@ -1,3 +1,9 @@
+ksm-control-daemon (1.3-1) pve; urgency=medium
+
+  * rebuild for PVE 6.0 / Debian Buster
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 24 Jun 2019 11:12:38 +0200
+
 ksm-control-daemon (1.2-2) unstable; urgency=medium
 
   * rebuild for PVE 5.0 / Debian Stretch
