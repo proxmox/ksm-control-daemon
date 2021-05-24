@@ -14,12 +14,7 @@ include /usr/share/dpkg/default.mk
 destdir := $(CURDIR)/debian/ksm-control-daemon
 
 override_dh_auto_install:
-	# Add here commands to install the package into debian/ksm-control-scripts.
-	#$(MAKE) DESTDIR=$(CURDIR)/debian/ksm-control-scripts install
-
-	#install -D -m 0755 $(CURDIR)/ksmtuned.init $(destdir)/etc/init.d/ksmtuned
 	install -D -m 0755 $(CURDIR)/ksmtuned $(destdir)/usr/sbin/ksmtuned
-	install -D -m 0644 $(CURDIR)/debian/defaults $(destdir)/etc/default/ksmtuned
 	install -D -m 0644 $(CURDIR)/ksmtuned.conf $(destdir)/etc/ksmtuned.conf
 
 override_dh_installsystemd:
