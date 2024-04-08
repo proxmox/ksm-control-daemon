@@ -1,3 +1,21 @@
+ksm-control-daemon (1.5-1) bookworm; urgency=medium
+
+  * fix formatting when summing up large numbers of memory
+
+  * use the proportional set size (PSS) instead of the virtual set size (VSZ
+    or VSS) for calculating memory usage. PSS is the sum of the physical
+    memory the process is using all alone, plus the amount of memory shared
+    with other processes divided through how many processes its shared.
+    This should be a much better classification compared to the virtual set
+    size, which can be huge even though a process doesn't use much memory at
+    all. Due to better accounting the shared memory it should be also beat the
+    otherwise good resident set size (RSZ or RSS) metric.
+
+  * add a new `KSM_PS_METRIC` variable to allow users to override the metric
+    used for calculating memory usage.
+
+ -- Proxmox Support Team <support@proxmox.com>  Mon, 08 Apr 2024 17:15:21 +0200
+
 ksm-control-daemon (1.4-1) bullseye; urgency=medium
 
   * rebuild for Proxmox VE 7 / Debian Bullseye
