@@ -27,8 +27,9 @@ ksm-control-scripts.org/ksm.init: ksm-control-scripts.org.tar.gz
 	touch $@
 
 .PHONY: upload
+upload: UPLOAD_DIST ?= $(DEB_DISTRIBUTION)
 upload: ${KSM_DEB}
-	tar cf - ${KSM_DEB} | ssh repoman@repo.proxmox.com -- upload --product pve --dist bookworm
+	tar cf - ${KSM_DEB} | ssh repoman@repo.proxmox.com -- upload --product pve --dist ${UPLOAD_DIST}
 
 .PHONY: distclean
 distclean: clean
