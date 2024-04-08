@@ -1,0 +1,16 @@
+--- ksm-control-scripts/ksmtuned	2024-01-25 11:33:03.485039813 +0100
++++ ksm-control-scripts.new/ksmtuned	2024-01-25 11:37:40.544751316 +0100
+@@ -72,11 +72,11 @@
+     # calculate how much memory is committed to running qemu processes
+     local progname
+     progname=${1:-kvm}
+-    ps -C "$progname" -o rsz | awk '{ sum += $1 }; END { print sum }'
++    ps -C "$progname" -o rsz | awk '{ sum += $1 }; END { printf ("%.0f", sum) }'
+ }
+ 
+ free_memory () {
+-    awk '/^(MemFree|Buffers|Cached):/ {free += $2}; END {print free}' \
++    awk '/^(MemFree|Buffers|Cached):/ {free += $2}; END { printf ("%.0f", free) }' \
+                 /proc/meminfo
+ }
+ 
