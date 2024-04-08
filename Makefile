@@ -1,10 +1,8 @@
+include /usr/share/dpkg/default.mk
+
 PACKAGE=ksm-control-daemon
 
-# also update debian/changelog
-PKGVER=1.3
-PKGREL=1
-
-KSM_DEB=${PACKAGE}_${PKGVER}-${PKGREL}_all.deb
+KSM_DEB=${PACKAGE}_${DEB_VERSION_UPSTREAM_REVISION}_all.deb
 
 GITVERSION:=$(shell git rev-parse HEAD)
 
