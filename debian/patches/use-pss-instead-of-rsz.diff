@@ -1,11 +1,39 @@
---- ksm-control-scripts/ksmtuned	2024-04-08 15:10:04.218449486 +0200
-+++ ksm-control-scripts.new/ksmtuned	2024-04-08 15:10:16.214620527 +0200
-@@ -72,7 +72,7 @@
+diff --git a/ksmtuned b/ksmtuned
+index c59dec0..f8c1503 100644
+--- a/ksmtuned
++++ b/ksmtuned
+@@ -42,6 +42,10 @@ KSM_SLEEP_MSEC=${KSM_SLEEP_MSEC:-10}
+ KSM_THRES_COEF=${KSM_THRES_COEF:-20}
+ KSM_THRES_CONST=${KSM_THRES_CONST:-2048}
+ 
++KSM_PS_METRIC=${KSM_PS_METRIC:-pss}
++
++debug using $KSM_PS_METRIC metric
++
+ total=`awk '/^MemTotal:/ {print $2}' /proc/meminfo`
+ debug total $total
+ 
+@@ -72,7 +76,7 @@ committed_memory () {
      # calculate how much memory is committed to running qemu processes
      local progname
      progname=${1:-kvm}
 -    ps -C "$progname" -o rsz | awk '{ sum += $1 }; END { printf ("%.0f", sum) }'
-+    ps -C "$progname" -o pss= | awk '{ sum += $1 }; END { printf ("%.0f", sum) }'
++    ps -C "$progname" -o "$KSM_PS_METRIC" | awk '{ sum += $1 }; END { printf ("%.0f", sum) }'
  }
  
  free_memory () {
+diff --git a/ksmtuned.conf b/ksmtuned.conf
+index fc4518c..33e7b31 100644
+--- a/ksmtuned.conf
++++ b/ksmtuned.conf
+@@ -15,6 +15,10 @@
+ # KSM_THRES_COEF=20
+ # KSM_THRES_CONST=2048
+ 
++# The metric used to calculate how much memory is used by a QEMU process
++# The proportional set size (pss) or the residential (rsz) ones are good fits.
++# KSM_PS_METRIC=pss
++
+ # uncomment the following if you want ksmtuned debug info
+ 
+ # LOGFILE=/var/log/ksmtuned
