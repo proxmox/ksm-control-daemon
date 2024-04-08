@@ -40,6 +40,9 @@ distclean: clean
 clean:
 	rm -rf *~ ksm-control-scripts ${PACKAGE}_*
 
+.PHONY: deb
+deb: ${KSM_DEB}
+
 .PHONY: dinstall
 dinstall: ${KSM_DEB}
 	dpkg -i ${KSM_DEB}
